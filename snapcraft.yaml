@@ -64,6 +64,10 @@ parts:
     # source-type: git
     # source-tag: 'v0.4.5-2'
     override-build: |
+      rm /etc/resolv.conf
+      echo 'nameserver 1.1.1.1'  > /etc/resolv.conf
+      echo 'nameserver 1.1.0.0' >> /etc/resolv.conf
+
       /usr/bin/env -i /bin/bash -l -c "/usr/bin/env SRC_PATH=$SNAPCRAFT_PART_BUILD /usr/bin/env OUT_PATH=$SNAPCRAFT_PART_BUILD/snap/local $SNAPCRAFT_PART_BUILD/support/build-with-gtk-libadwaita.sh"
 
       # Remove the gatherer binary, it'll be rebuilt in the `gatherer` part
@@ -105,6 +109,10 @@ parts:
       - libtalloc-dev
     source: https://gitlab.com/mission-center-devs/mission-center.git
     override-build: |
+      rm /etc/resolv.conf
+      echo 'nameserver 1.1.1.1'  > /etc/resolv.conf
+      echo 'nameserver 1.1.0.0' >> /etc/resolv.conf
+
       # Create rootfs
       systemctl start docker
 
