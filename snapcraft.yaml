@@ -68,6 +68,11 @@ parts:
       echo 'nameserver 1.1.1.1'  > /etc/resolv.conf
       echo 'nameserver 1.1.0.0' >> /etc/resolv.conf
 
+      rm -rf /etc/apt/sources.list.d
+      echo 'deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse' > /etc/apt/sources.list
+      echo 'deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse' >> /etc/apt/sources.list
+      echo 'deb http://archive.ubuntu.com/ubuntu jammy-security main restricted universe multiverse' >> /etc/apt/sources.list
+
       /usr/bin/env -i /bin/bash -l -c "/usr/bin/env SRC_PATH=$SNAPCRAFT_PART_BUILD /usr/bin/env OUT_PATH=$SNAPCRAFT_PART_BUILD/snap/local $SNAPCRAFT_PART_BUILD/support/build-with-gtk-libadwaita.sh"
 
       # Remove the gatherer binary, it'll be rebuilt in the `gatherer` part
